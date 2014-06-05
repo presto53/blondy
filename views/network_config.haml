@@ -1,0 +1,21 @@
+%h1.page-header Network config
+%form{role: "form", method: "post", action: "/network/#{@id == 0 ? 'create' : 'update'}"}
+  .form-group
+    %label{for: "name"} Name
+    %input#name.form-control.blondy-form-control{placeholder: "Enter name", type: "text", name: "name", value: @network.name}/
+  .form-group
+    %label{for: "network"} Network
+    %input#network.form-control.blondy-form-control{placeholder: "Enter network", type: "text", name: "network", value: @network.network}/
+  .form-group
+    %label{for: "vlan"} Vlan
+    %input#vlan.form-control.blondy-form-control{placeholder: "Enter vlan number", type: "text", name: "vlan", value: @network.vlan}/
+  .form-group
+    %input{type: "hidden", name: "id", value: @id}/
+    %button.btn.btn-default.btn-primary.btn-block.btn-table.form-control.blondy-form-control{type: "submit"}
+      %span.glyphicon-plus-sign.glyphicon
+        Save
+  - if @id != 0
+    .form-group
+      %a.btn.btn-primary.btn-block.btn-table.form-control.blondy-form-control.btn-danger{href: "/network/delete?id=#{@id}"}
+        %span.glyphicon-remove-sign.glyphicon
+          Delete

@@ -1,0 +1,38 @@
+%h1.page-header= "#{@group.name} group"
+.table-responsive
+  %table.table.table-striped.table-condensed.table-hover{id: "hosts"}
+    %thead
+      %tr
+        %th
+          %a{href: "/host/create"}
+            %button.btn.btn-default.btn-primary.btn-block.btn-table
+              %span.glyphicon-plus-sign.glyphicon
+                New
+      %tr
+        %th Status
+        %th Hostname
+        %th MAC address
+        %th IP address
+        %th Dhcp config
+        %th Installer config
+        %th Last check-in
+    %tbody{id: "list"}
+      - @hosts.each do |host|
+        %tr
+          %td
+            - if host.netboot
+              %a.btn.btn-xs.btn-block.btn-success{id: "netboot", href: "/host/action/disable?id=#{host.id}&type=pxeboot"} Boot
+            - else
+              %a.btn.btn-xs.btn-block.btn-danger{id: "netboot", href: "/host/action/enable?id=#{host.id}&type=pxeboot"} Boot
+            - if host.install_status
+              %a.btn.btn-xs.btn-block.btn-success{id: "install", href: "/host/action/disable?id=#{host.id}&type=install"} Install
+            - else
+              %a.btn.btn-xs.btn-block.btn-danger{id: "install", href: "/host/action/enable?id=#{host.id}&type=install"} Install
+          %td
+            %a{href: "/host/#{host.id}"}= host.hostname
+          %td= host.hwaddr
+          %td= host.dhcp_lease ? host.dhcp_lease.ip : 'none'
+          %td= host.dhcp_config ? host.dhcp_config.name : 'none'
+          %td= host.installer_config ? host.installer_config.name : 'none'
+          - last_checkin = seconds_to_string(Time.parse(DateTime.now.to_s) - Time.parse(host.checkin.to_s)) if host.checkin
+          %td= last_checkin || 'never'

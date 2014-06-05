@@ -1,0 +1,6 @@
+text_configs_path: '/path_to_configs'
+install_scripts_path: '/path_to_scripts'
+auth: 'local'
+password_salt: 'ChangeMePlease'
+ldap_server: 'ldap.example.com'
+ldap_bind_dn: 'ou=services,dc=example,dc=com'

@@ -1,0 +1,17 @@
+%h1.page-header Network configs
+.table-responsive
+  %table.table.table-striped.table-condensed.table-hover{id: "networkConfigs"}
+    %thead
+      %tr
+        %th
+          %a.btn.btn-default.btn-primary{href: '/network/create'}
+            %span.glyphicon-plus-sign.glyphicon
+            New
+      %tr
+        %th Network
+    %tbody{id: "list"}
+      - if @networks
+        - @networks.each do |network|
+          %tr
+            %td
+              %a{href: "/network/#{network.id}"}= network.name

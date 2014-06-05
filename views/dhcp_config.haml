@@ -1,0 +1,35 @@
+%h1.page-header Dhcp config
+%form{role: "form", method: "post", action: "/dhcp/#{@id == 0 ? 'create' : 'update'}"}
+  .form-group
+    %label{for: "name"} Name
+    %input#name.form-control.blondy-form-control{placeholder: "Enter name", type: "text", name: "name", value: @config.name}/
+  .form-group
+    %label{for: "fname"} Filename
+    %input#fname.form-control.blondy-form-control{placeholder: "Enter filename", type: "text", name: "fname", value: @config.fname}/
+  .form-group
+    %label{for: "gw"} Gateway
+    %input#gw.form-control.blondy-form-control{placeholder: "Enter gateway", type: "text", name: "gw", value: @config.gw}/
+  .form-group
+    %label{for: "netmask"} Netmask
+    %input#netmask.form-control.blondy-form-control{placeholder: "Enter netmask", type: "text", name: "netmask", value: @config.netmask}/
+  .form-group
+    %label{for: "dns"} DNS
+    %input#dns.form-control.blondy-form-control{placeholder: "Enter DNS", type: "text", name: "dns", value: @config.dns}/
+  .form-group
+    %label{for: "domainname"} Domain
+    %input#domainname.form-control.blondy-form-control{placeholder: "Enter domain name", type: "text", name: "domain", value: @config.domain}/
+  .form-group
+    %label{for: "dhcp_pool_id"} Dhcp pool
+    %select#dhcp_pool_id.form-control.blondy-form-control{placeholder: "Dhcp pool", name: "dhcp_pool_id"}
+      - @dhcp_pools.each do |pool|
+        %option{value: pool.id, selected: @config.dhcp_pool_id == pool.id ? true : false}= pool.name
+  .form-group
+    %input{type: "hidden", name: "id", value: @id}/
+    %button.btn.btn-default.btn-primary.btn-block.btn-table.form-control.blondy-form-control{type: "submit"}
+      %span.glyphicon-plus-sign.glyphicon
+        Save
+  - if @id != 0
+    .form-group
+      %a.btn.btn-primary.btn-block.btn-table.form-control.blondy-form-control.btn-danger{href: "/dhcp/delete?id=#{@id}"}
+        %span.glyphicon-remove-sign.glyphicon
+          Delete

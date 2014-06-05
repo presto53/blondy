@@ -1,0 +1,12 @@
+%h1.page-header Login
+%form{role: "form", method: "post", action: "/login"}
+  .form-group
+    %label{for: "login"} Login
+    %input#login.form-control.blondy-form-control{placeholder: "Enter login", type: "text", name: "login"}/
+  .form-group
+    %label{for: "password"} Password
+    %input#password.form-control.blondy-form-control{placeholder: "Enter password", type: "password", name: "password"}/
+  .form-group
+    %button.btn.btn-default.btn-primary.btn-block.btn-table.form-control.blondy-form-control{type: "submit"}
+      %span.glyphicon
+        Login

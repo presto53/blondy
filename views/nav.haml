@@ -1,0 +1,11 @@
+%ul.nav.nav-sidebar
+  %li{class: "#{'active' if /\/groups/.match(request.path)}"}
+    %a{href: "/groups"} Hosts groups
+  %li{class: "#{'active' if /(\/dhcp$)|(\/dhcp\/)/.match(request.path)}"}
+    %a{href: "/dhcp"} Dhcp configs
+  %li{class: "#{'active' if /\/dhcp_pool/.match(request.path)}"}
+    %a{href: "/dhcp_pool"} Dhcp pools
+  %li{class: "#{'active' if /\/installer/.match(request.path)}"}
+    %a{href: "/installer"} Installer configs
+  %li{class: "#{'active' if /\/network/.match(request.path)}"}
+    %a{href: "/network"} Network configs

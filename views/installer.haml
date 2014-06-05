@@ -1,0 +1,17 @@
+%h1.page-header Installer configs
+.table-responsive
+  %table.table.table-striped.table-condensed.table-hover{id: "installerConfigs"}
+    %thead
+      %tr
+        %th
+          %a.btn.btn-default.btn-primary{href: '/installer/create'}
+            %span.glyphicon-plus-sign.glyphicon
+            New
+      %tr
+        %th Config name
+    %tbody{id: "list"}
+      - if @configs
+        - @configs.each do |config|
+          %tr
+            %td
+              %a{href: "/installer/#{config.id}"}= config.name

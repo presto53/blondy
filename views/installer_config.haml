@@ -1,0 +1,31 @@
+%h1.page-header Installer config
+%form{role: "form", method: "post", action: "/installer/#{@id == 0 ? 'create' : 'update'}"}
+  .form-group
+    %label{for: "name"} Name
+    %input#name.form-control.blondy-form-control{placeholder: "Enter name", type: "text", name: "name", value: @config.name}/
+  .form-group
+    %label{for: "config"} Config
+    %select#config.form-control.blondy-form-control{placeholder: "Config", name: "config"}
+      - @text_configs.each do |text_config|
+        %option{value: text_config, selected: @config.config == text_config ? true : false}= text_config
+  .form-group
+    %label{for: "install_script"} Install script
+    %select#install_script.form-control.blondy-form-control{placeholder: "Install script", name: "install_script"}
+      - @install_scripts.each do |script|
+        %option{value: script, selected: @config.install_script == script ? true : false}= script
+  .form-group
+    %label{for: "kernel"} Kernel
+    %input#kernel.form-control.blondy-form-control{placeholder: "Enter kernel (GENERIC, R0)", type: "text", name: "kernel", value: @config.kernel}/
+  .form-group
+    %label{for: "packageroot"} Package root
+    %input#packageroot.form-control.blondy-form-control{placeholder: "Enter PACKAGEROOT", type: "text", name: "packageroot", value: @config.packageroot}/
+  .form-group
+    %input{type: "hidden", name: "id", value: @id}/
+    %button.btn.btn-default.btn-primary.btn-block.btn-table.form-control.blondy-form-control{type: "submit"}
+      %span.glyphicon-plus-sign.glyphicon
+        Save
+  - if @id != 0
+    .form-group
+      %a.btn.btn-primary.btn-block.btn-table.form-control.blondy-form-control.btn-danger{href: "/installer/delete?id=#{@id}"}
+        %span.glyphicon-remove-sign.glyphicon
+          Delete

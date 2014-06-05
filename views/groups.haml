@@ -1,0 +1,22 @@
+%h1.page-header Hosts groups
+.table-responsive
+  %table.table.table-striped.table-condensed.table-hover{id: "hostGroups"}
+    %thead
+      %tr
+        %form.form-inline{role: "form", method: "post", action: "/group/create"}
+          %th
+            .form-group
+              %label.sr-only{for: "name"} Name
+              %input#name.form-control{placeholder: "Enter name for group", type: "text", name: "name"}/
+          %th
+            %button.btn.btn-default.btn-primary.btn-block.btn-table{type: "submit"}
+              %span.glyphicon-plus-sign.glyphicon
+              add
+      %tr
+        %th Group name
+    %tbody{id: "list"}
+      - if @groups
+        - @groups.each do |group|
+          %tr
+            %td
+              %a{href: "/group/#{group.id}"}= group.name

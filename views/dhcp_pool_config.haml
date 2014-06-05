@@ -1,0 +1,21 @@
+%h1.page-header Dhcp pools config
+%form{role: "form", method: "post", action: "/dhcp_pool/#{@id == 0 ? 'create' : 'update'}"}
+  .form-group
+    %label{for: "name"} Name
+    %input#name.form-control.blondy-form-control{placeholder: "Enter name", type: "text", name: "name", value: @dhcp_pool.name}/
+  .form-group
+    %label{for: "network"} Network
+    %input#network.form-control.blondy-form-control{placeholder: "Enter network", type: "text", name: "network", value: @dhcp_pool.network}/
+  .form-group
+    %label{for: "exceptions"} Exceptions
+    %input#exceptions.form-control.blondy-form-control{placeholder: "Enter exceptions", type: "text", name: "exceptions", value: @dhcp_pool.exceptions}/
+  .form-group
+    %input{type: "hidden", name: "id", value: @id}/
+    %button.btn.btn-default.btn-primary.btn-block.btn-table.form-control.blondy-form-control{type: "submit"}
+      %span.glyphicon-plus-sign.glyphicon
+        Save
+  - if @id != 0
+    .form-group
+      %a.btn.btn-primary.btn-block.btn-table.form-control.blondy-form-control.btn-danger{href: "/dhcp_pool/delete?id=#{@id}"}
+        %span.glyphicon-remove-sign.glyphicon
+          Delete

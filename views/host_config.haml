@@ -1,0 +1,33 @@
+%h1.page-header Host config
+%form{role: "form", method: "post", action: "/host/#{@id == 0 ? 'create' : 'update'}"}
+  .form-group
+    %label{for: "hostname"} Hostname
+    %input#hostname.form-control.blondy-form-control{placeholder: "Enter hostname", type: "text", name: "hostname", value: @host.hostname}/
+  .form-group
+    %label{for: "hwaddr"} MAC address
+    %input#hwaddr.form-control.blondy-form-control{placeholder: "Enter MAC address", type: "text", name: "hwaddr", value: @host.hwaddr}/
+  .form-group
+    %label{for: "dhcp_config_id"} Dhcp config
+    %select#dhcp_config_id.form-control.blondy-form-control{placeholder: "Dhcp config", name: "dhcp_config_id"}
+      - @dhcp_configs.each do |config|
+        %option{value: config.id, selected: @host.dhcp_config_id == config.id ? true : false}= config.name
+  .form-group
+    %label{for: "installer_config_id"} Installer config
+    %select#installer_config_id.form-control.blondy-form-control{placeholder: "Installer config", name: "installer_config_id"}
+      - @installer_configs.each do |config|
+        %option{value: config.id, selected: @host.installer_config_id == config.id ? true : false}= config.name
+  .form-group
+    %label{for: "host_group_id"} Host group
+    %select#host_group_id.form-control.blondy-form-control{placeholder: "Host group", name: "host_group_id"}
+      - @host_groups.each do |group|
+        %option{value: group.id, selected: @host.host_group_id == group.id ? true : false}= group.name
+  .form-group
+    %input{type: "hidden", name: "id", value: @id}/
+    %button.btn.btn-default.btn-primary.btn-block.btn-table.blondy-form-control{type: "submit"}
+      %span.glyphicon-plus-sign.glyphicon
+        Save
+  - if @id != 0
+    .form-group
+      %a.btn.btn-primary.btn-block.btn-table.form-control.blondy-form-control.btn-danger{href: "/host/delete?id=#{@id}"}
+        %span.glyphicon-remove-sign.glyphicon
+          Delete
